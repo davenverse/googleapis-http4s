@@ -27,7 +27,7 @@ def mkProject(
   Project(id, file(id)) // todo make cross
     .enablePlugins(Http4sGrpcPlugin)
     .settings(
-      name := module + "-http4s", // set name to original plus http4s
+      name := module.replace("proto", "http4s-grpc"), // set name to original plus http4s
       Compile / PB.targets ++= Seq(
         scalapb.gen(grpc = false) -> (Compile / sourceManaged).value / "scalapb"
       ),
@@ -44,7 +44,18 @@ lazy val `googleapis-http4s` = tlCrossRootProject
   )
 
 lazy val java =
-  mkProject("java", "protobuf-java", "3.21.7", "com.google.protobuf")
+  Project("java", file("java")) // todo make cross
+    .enablePlugins(Http4sGrpcPlugin)
+    .settings(
+      name := "http4s-grpc-protobuf-java", // set name to original plus http4s
+      Compile / PB.targets ++= Seq(
+        scalapb.gen(grpc = false) -> (Compile / sourceManaged).value / "scalapb"
+      ),
+      libraryDependencies ++= Seq(
+        "com.google.protobuf" % "protobuf-java" % "3.21.7" % "protobuf-src" intransitive ()
+      )
+    )
+
 lazy val common =
   mkProject("common", "proto-google-common-protos", "2.9.6").dependsOn(java)
 
