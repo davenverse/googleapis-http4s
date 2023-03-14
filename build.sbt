@@ -46,6 +46,9 @@ lazy val `googleapis-http4s` = tlCrossRootProject
     cloudBigQueryReservationV1,
     cloudBigQueryStorageV1,
     cloudBigtableV2,
+    cloudKmsV1,
+    cloudMemcacheV1,
+    cloudPubsubV1,
     cloudFirestoreV1,
     cloudRedisV1,
     cloudSpannerV1,
@@ -94,6 +97,18 @@ lazy val cloudBigtableV2 =
 
 lazy val cloudFirestoreV1 =
   mkProject("cloud-firestore-v1", "proto-google-cloud-firestore-v1", "3.9.0")
+    .dependsOn(common)
+
+lazy val cloudKmsV1 =
+  mkProject("cloud-kms-v1", "proto-google-cloud-kms-v1", "0.106.0")
+    .dependsOn(common)
+
+lazy val cloudMemcacheV1 =
+  mkProject("cloud-memcache-v1", "proto-google-cloud-memcache-v1", "2.12.0")
+    .dependsOn(common)
+
+lazy val cloudPubsubV1 =
+  mkProject("cloud-pubsub-v1", "proto-google-cloud-pubsub-v1", "1.105.5")
     .dependsOn(common)
 
 lazy val cloudRedisV1 =
