@@ -39,7 +39,9 @@ def mkProject(
 
 // Projects
 lazy val `googleapis-http4s` = tlCrossRootProject
-  .aggregate(java, common, iamV1, cloudStorageV2, spannerV1, bigTableV2)
+  .aggregate(
+    java, common, iamV1, cloudStorageV2, spannerV1, bigTableV2, fireStoreV1
+  )
 
 lazy val java =
   mkProject("java", "protobuf-java", "3.21.7", "com.google.protobuf")
@@ -59,6 +61,10 @@ lazy val spannerV1 =
 
 lazy val bigTableV2 =
   mkProject("bigtable-v2", "proto-google-cloud-bigtable-v2", "2.20.0")
+    .dependsOn(common)
+
+lazy val fireStoreV1 =
+  mkProject("firestore-v1", "proto-google-cloud-firestore-v1", "3.9.0")
     .dependsOn(common)
 
 lazy val site = project.in(file("site"))
