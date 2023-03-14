@@ -82,11 +82,11 @@ jobs:
 
       - name: Make target directories
         if: github.event_name != 'pull_request' && (startsWith(github.ref, 'refs/tags/v') || github.ref == 'refs/heads/main')
-        run: mkdir -p target cloud-storage-v2/target .js/target site/target java/target common/target spanner-v1/target .jvm/target .native/target iam-v1/target project/target
+        run: mkdir -p target cloud-storage-v2/target bigtable-v2/target .js/target site/target java/target common/target spanner-v1/target .jvm/target .native/target iam-v1/target project/target
 
       - name: Compress target directories
         if: github.event_name != 'pull_request' && (startsWith(github.ref, 'refs/tags/v') || github.ref == 'refs/heads/main')
-        run: tar cf targets.tar target cloud-storage-v2/target .js/target site/target java/target common/target spanner-v1/target .jvm/target .native/target iam-v1/target project/target
+        run: tar cf targets.tar target cloud-storage-v2/target bigtable-v2/target .js/target site/target java/target common/target spanner-v1/target .jvm/target .native/target iam-v1/target project/target
 
       - name: Upload target directories
         if: github.event_name != 'pull_request' && (startsWith(github.ref, 'refs/tags/v') || github.ref == 'refs/heads/main')
