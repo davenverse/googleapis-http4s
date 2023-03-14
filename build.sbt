@@ -24,7 +24,6 @@ def mkProject(
 ) =
   sbtcrossproject.CrossProject(id, file(id))(JSPlatform, JVMPlatform, NativePlatform)
     .enablePlugins(Http4sGrpcPlugin)
-    .disablePlugins(MimaPlugin)
     .settings(
       name := "http4s-grpc-" + module.replace("proto-", ""),
       Compile / PB.targets ++= Seq(
@@ -32,7 +31,8 @@ def mkProject(
       ),
       libraryDependencies ++= Seq(
         org % module % version % "protobuf-src" intransitive ()
-      )
+      ),
+      mimaPreviousArtifacts := Set(),
     )
 
 // Projects
