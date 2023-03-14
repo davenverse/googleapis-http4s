@@ -39,7 +39,7 @@ def mkProject(
 
 // Projects
 lazy val `googleapis-http4s` = tlCrossRootProject
-  .aggregate(java, common, iamV1, cloudStorageV2)
+  .aggregate(java, common, iamV1, cloudStorageV2, spannerV1)
 
 lazy val java =
   mkProject("java", "protobuf-java", "3.21.7", "com.google.protobuf")
@@ -52,6 +52,10 @@ lazy val iamV1 =
 lazy val cloudStorageV2 =
   mkProject("cloud-storage-v2", "proto-google-cloud-storage-v2", "2.9.3-alpha")
     .dependsOn(iamV1)
+
+lazy val spannerV1 =
+  mkProject("spanner-v1", "proto-google-cloud-spanner-v1", "6.37.0")
+    .dependsOn(common)
 
 
 
