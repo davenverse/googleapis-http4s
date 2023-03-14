@@ -27,7 +27,7 @@ def mkProject(
   Project(id, file(id)) // todo make cross
     .enablePlugins(Http4sGrpcPlugin)
     .settings(
-      name := module.replace("proto", "http4s-grpc"), // set name to original plus http4s
+      name := module.replace("proto", "http4s-grpc"), // set any proto to http4s-grpc-XYZ
       Compile / PB.targets ++= Seq(
         scalapb.gen(grpc = false) -> (Compile / sourceManaged).value / "scalapb"
       ),
@@ -47,7 +47,7 @@ lazy val java =
   Project("java", file("java")) // todo make cross
     .enablePlugins(Http4sGrpcPlugin)
     .settings(
-      name := "http4s-grpc-protobuf-java", // set name to original plus http4s
+      name := "http4s-grpc-protobuf-java",
       Compile / PB.targets ++= Seq(
         scalapb.gen(grpc = false) -> (Compile / sourceManaged).value / "scalapb"
       ),
