@@ -24,6 +24,7 @@ def mkProject(
 ) =
   sbtcrossproject.CrossProject(id, file(id))(JSPlatform, JVMPlatform, NativePlatform)
     .enablePlugins(Http4sGrpcPlugin)
+    .disablePlugins(MimaPlugin)
     .settings(
       name := "http4s-grpc-" + module.replace("proto-", ""),
       Compile / PB.targets ++= Seq(
@@ -46,6 +47,7 @@ lazy val `googleapis-http4s` = tlCrossRootProject
     cloudStorageV2,
     iamV1,
   )
+  .settings(mimaPreviousArtifacts := Set())
 
 // Core projects
 
