@@ -10,6 +10,8 @@ ThisBuild / developers := List(
 ThisBuild / tlCiReleaseBranches := Seq("main")
 ThisBuild / tlSonatypeUseLegacyHost := true
 
+ThisBuild / tlSitePublishBranch := Some("main")
+
 val Scala213 = "2.13.10"
 ThisBuild / crossScalaVersions := Seq(Scala213, "3.2.2")
 ThisBuild / scalaVersion := Scala213
@@ -17,6 +19,10 @@ ThisBuild / scalaVersion := Scala213
 ThisBuild / githubWorkflowBuild := Seq(
   WorkflowStep.Sbt(List("compile"), name = Some("Compile"))
 )
+
+def mkDep(org: String, mod: String, v: String) = {
+  s"""  "$org" %%% "$mod" % "$v""""
+}
 
 def mkProject(
     id: String,
@@ -29,6 +35,14 @@ def mkProject(
     .settings(
       name := "http4s-grpc-" + module.replace("proto-", ""),
       Keys.version := s"$version+${(ThisBuild / Keys.version).value}", // google v + build v
+      docs / mdocVariables := {
+        // this is an atrocious hack b/c no stable setting evaluation order in sbt
+        val vars = (docs / mdocVariables).value
+        val modules = vars.get("MODULES").toList.flatMap(_.split('\n')).toSet
+        val dep = mkDep(organization.value, moduleName.value, Keys.version.value)
+        val newModules = (modules + dep).toList.sorted.mkString("\n")
+        vars.updated("MODULES", newModules)
+      },
       Compile / PB.targets ++= Seq(
         scalapb.gen(grpc = false) -> (Compile / sourceManaged).value / "scalapb"
       ),
@@ -155,3 +169,9 @@ lazy val cloudStorageV2 =
 
 lazy val iamV1 =
   mkProject("iam-v1", "proto-google-iam-v1", "1.9.3").dependsOn(common)
+
+lazy val docs = project.in(file("site"))
+  .enablePlugins(TypelevelSitePlugin)
+  .settings(
+    tlSiteIsTypelevelProject := true,
+  )
