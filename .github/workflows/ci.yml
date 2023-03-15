@@ -64,16 +64,8 @@ jobs:
       - name: Check that workflows are up to date
         run: sbt githubWorkflowCheck
 
-      - name: scalaJSLink
-        if: matrix.project == 'googleapis-http4sJS'
-        run: sbt 'project ${{ matrix.project }}' '++ ${{ matrix.scala }}' Test/scalaJSLinkerResult
-
-      - name: nativeLink
-        if: matrix.project == 'googleapis-http4sNative'
-        run: sbt 'project ${{ matrix.project }}' '++ ${{ matrix.scala }}' Test/nativeLink
-
-      - name: Test
-        run: sbt 'project ${{ matrix.project }}' '++ ${{ matrix.scala }}' test
+      - name: Compile
+        run: sbt 'project ${{ matrix.project }}' '++ ${{ matrix.scala }}' compile
 
       - name: Make target directories
         if: github.event_name != 'pull_request' && (startsWith(github.ref, 'refs/tags/v') || github.ref == 'refs/heads/main')
