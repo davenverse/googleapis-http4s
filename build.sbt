@@ -40,6 +40,7 @@ lazy val `googleapis-http4s` = tlCrossRootProject
   .aggregate(
     java,
     common,
+    cloudAlloyDb,
     cloudBigQueryConnectionV1,
     cloudBigQueryDataPolicyV1,
     cloudBigQueryDataTransferV1,
@@ -47,6 +48,7 @@ lazy val `googleapis-http4s` = tlCrossRootProject
     cloudBigQueryReservationV1,
     cloudBigQueryStorageV1,
     cloudBigtableV2,
+    cloudDatastreamV1,
     cloudKmsV1,
     cloudMemcacheV1,
     cloudPubsubV1,
@@ -68,6 +70,10 @@ lazy val common =
   .dependsOn(java)
 
 // Everything else, alphabetically
+
+lazy val cloudAlloyDb =
+  mkProject("cloud-alloydb", "proto-google-cloud-alloydb-v1", "0.1.0")
+  .dependsOn(common)
 
 lazy val cloudBigQueryConnectionV1 =
   mkProject("cloud-bigqueryconnection-v1", "proto-google-cloud-bigqueryconnection-v1", "2.14.0")
@@ -95,7 +101,11 @@ lazy val cloudBigQueryStorageV1 =
 
 lazy val cloudBigtableV2 =
   mkProject("cloud-bigtable-v2", "proto-google-cloud-bigtable-v2", "2.20.0")
-    .dependsOn(common)
+  .dependsOn(common)
+
+lazy val cloudDatastreamV1 =
+  mkProject("cloud-datastream-v1", "proto-google-cloud-datastream-v1", "1.11.0")
+  .dependsOn(common)
 
 lazy val cloudFirestoreV1 =
   mkProject("cloud-firestore-v1", "proto-google-cloud-firestore-v1", "3.9.0")
