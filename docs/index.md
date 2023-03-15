@@ -1,12 +1,14 @@
-# googleapis-http4s - Google Apis for Http4s [![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.chrisdavenport/googleapis-http4s_2.13/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.chrisdavenport/googleapis-http4s_2.13)
+# googleapis-http4s
 
-## Quick Start
+Call Google APIs on JVM, Node.js, and Scala Native via [http4s-grpc] and [Ember].
 
-To use googleapis-http4s in an existing SBT project with Scala 2.13 or a later version, add the following dependencies to your
-`build.sbt` depending on your needs:
+## Quick start
 
 ```scala
 libraryDependencies ++= Seq(
-  "io.chrisdavenport" %% "googleapis-http4s" % "<version>"
+@MODULES@
 )
 ```
+
+[http4s-grpc]: https://github.com/davenverse/http4s-grpc
+[Ember]: https://http4s.org/v0.23/docs/integrations.html#ember
