@@ -1,6 +1,4 @@
-ThisBuild / version := {
-  git.gitCurrentTags.value.headOption.getOrElse(git.gitHeadCommit.value.get + "-SNAPSHOT")
-}
+ThisBuild / version := "0.0.1" // global version for "blend" defined in this build
 
 ThisBuild / organization := "io.chrisdavenport"
 ThisBuild / organizationName := "Christopher Davenport"
@@ -26,6 +24,7 @@ def mkProject(
     .enablePlugins(Http4sGrpcPlugin)
     .settings(
       name := "http4s-grpc-" + module.replace("proto-", ""),
+      Keys.version := s"$version+${(ThisBuild / Keys.version).value}", // google v + build v
       Compile / PB.targets ++= Seq(
         scalapb.gen(grpc = false) -> (Compile / sourceManaged).value / "scalapb"
       ),
@@ -33,6 +32,21 @@ def mkProject(
         org % module % version % "protobuf-src" intransitive ()
       ),
       mimaPreviousArtifacts := Set(),
+      publish / skip := {
+        import coursier._
+        val mod = CrossVersion(crossVersion.value,  scalaVersion.value, scalaBinaryVersion.value)
+          .get.apply(moduleName.value)
+        val dep = Dependency(Module(Organization(organization.value), ModuleName(mod)), Keys.version.value)
+        try { // if this dep already exists, skip publishing
+          Resolve()
+            .addDependencies(dep)
+            .addRepositories(Repositories.sonatype("releases"))
+            .run()
+          true
+        } catch {
+          case _: error.ResolutionError => false
+        }
+      }
     )
 
 // Projects
