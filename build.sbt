@@ -16,6 +16,8 @@ val Scala213 = "2.13.10"
 ThisBuild / crossScalaVersions := Seq(Scala213, "3.2.2")
 ThisBuild / scalaVersion := Scala213
 
+ThisBuild / githubWorkflowJavaVersions := Seq(JavaSpec.temurin("17"))
+
 ThisBuild / githubWorkflowBuild := Seq(
   WorkflowStep.Sbt(List("compile"), name = Some("Compile"))
 )
