@@ -88,6 +88,7 @@ lazy val `googleapis-http4s` = tlCrossRootProject
     cloudRedisV1,
     cloudSpannerV1,
     cloudStorageV2,
+    cloudTraceV2,
     iamV1,
   )
   .settings(mimaPreviousArtifacts := Set())
@@ -166,6 +167,10 @@ lazy val cloudSpannerV1 =
 lazy val cloudStorageV2 =
   mkProject("cloud-storage-v2", "proto-google-cloud-storage-v2", "2.20.1-alpha")
     .dependsOn(iamV1)
+
+lazy val cloudTraceV2 =
+  mkProject("cloud-trace-v2", "proto-google-cloud-trace-v2", "2.9.0")
+    .dependsOn(common)
 
 lazy val iamV1 =
   mkProject("iam-v1", "proto-google-iam-v1", "1.9.3").dependsOn(common)
