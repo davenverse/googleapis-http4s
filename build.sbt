@@ -1,4 +1,4 @@
-ThisBuild / version := "0.0.1" // global version for "blend" defined in this build
+ThisBuild / version := "0.0.2" // global version for "blend" defined in this build
 
 ThisBuild / organization := "io.chrisdavenport"
 ThisBuild / organizationName := "Christopher Davenport"
@@ -95,10 +95,10 @@ lazy val `googleapis-http4s` = tlCrossRootProject
 // Core projects
 
 lazy val java =
-  mkProject("java", "protobuf-java", "3.21.7", "com.google.protobuf")
+  mkProject("java", "protobuf-java", "3.22.2", "com.google.protobuf")
 
 lazy val common =
-  mkProject("common", "proto-google-common-protos", "2.9.6")
+  mkProject("common", "proto-google-common-protos", "2.14.3")
   .dependsOn(java)
 
 // Everything else, alphabetically
@@ -140,7 +140,7 @@ lazy val cloudDatastreamV1 =
   .dependsOn(common)
 
 lazy val cloudFirestoreV1 =
-  mkProject("cloud-firestore-v1", "proto-google-cloud-firestore-v1", "3.9.0")
+  mkProject("cloud-firestore-v1", "proto-google-cloud-firestore-v1", "3.9.1")
     .dependsOn(common)
 
 lazy val cloudKmsV1 =
@@ -164,7 +164,7 @@ lazy val cloudSpannerV1 =
     .dependsOn(common)
 
 lazy val cloudStorageV2 =
-  mkProject("cloud-storage-v2", "proto-google-cloud-storage-v2", "2.9.3-alpha")
+  mkProject("cloud-storage-v2", "proto-google-cloud-storage-v2", "2.20.1-alpha")
     .dependsOn(iamV1)
 
 lazy val iamV1 =
