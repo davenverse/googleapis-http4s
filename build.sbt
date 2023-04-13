@@ -175,7 +175,7 @@ lazy val cloudTraceV2 =
     .dependsOn(common)
 
 lazy val iamV1 =
-  mkProject("iam-v1", "proto-google-iam-v1", "1.10.0").dependsOn(common)
+  mkProject("iam-v1", "proto-google-iam-v1", "1.11.0").dependsOn(common)
 
 lazy val docs = project.in(file("site"))
   .enablePlugins(TypelevelSitePlugin)
