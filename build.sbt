@@ -98,7 +98,7 @@ lazy val `googleapis-http4s` = tlCrossRootProject
 // Core projects
 
 lazy val java =
-  mkProject("java", "protobuf-java", "3.22.2", "com.google.protobuf")
+  mkProject("java", "protobuf-java", "3.22.3", "com.google.protobuf")
 
 lazy val common =
   mkProject("common", "proto-google-common-protos", "2.15.0")
