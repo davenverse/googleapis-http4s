@@ -127,7 +127,7 @@ lazy val cloudBigQueryMigrationV2 =
   .dependsOn(common)
 
 lazy val cloudBigQueryReservationV1 =
-  mkProject("cloud-bigqueryreservation-v1", "proto-google-cloud-bigqueryreservation-v1", "2.14.0")
+  mkProject("cloud-bigqueryreservation-v1", "proto-google-cloud-bigqueryreservation-v1", "2.15.0")
   .dependsOn(common)
 
 lazy val cloudBigQueryStorageV1 =
