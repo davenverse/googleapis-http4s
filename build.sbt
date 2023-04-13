@@ -101,7 +101,7 @@ lazy val java =
   mkProject("java", "protobuf-java", "3.22.2", "com.google.protobuf")
 
 lazy val common =
-  mkProject("common", "proto-google-common-protos", "2.15.0")
+  mkProject("common", "proto-google-common-protos", "2.16.0")
   .dependsOn(java)
 
 // Everything else, alphabetically
@@ -111,7 +111,7 @@ lazy val cloudAlloyDb =
   .dependsOn(common)
 
 lazy val cloudBigQueryConnectionV1 =
-  mkProject("cloud-bigqueryconnection-v1", "proto-google-cloud-bigqueryconnection-v1", "2.15.0")
+  mkProject("cloud-bigqueryconnection-v1", "proto-google-cloud-bigqueryconnection-v1", "2.16.0")
   .dependsOn(common, iamV1)
 
 lazy val cloudBigQueryDataPolicyV1 =
