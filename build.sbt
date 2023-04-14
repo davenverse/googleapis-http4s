@@ -111,7 +111,7 @@ lazy val cloudAlloyDb =
   .dependsOn(common)
 
 lazy val cloudBigQueryConnectionV1 =
-  mkProject("cloud-bigqueryconnection-v1", "proto-google-cloud-bigqueryconnection-v1", "2.16.0")
+  mkProject("cloud-bigqueryconnection-v1", "proto-google-cloud-bigqueryconnection-v1", "2.17.0")
   .dependsOn(common, iamV1)
 
 lazy val cloudBigQueryDataPolicyV1 =
