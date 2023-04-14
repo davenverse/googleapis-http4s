@@ -163,7 +163,7 @@ lazy val cloudRedisV1 =
     .dependsOn(common)
 
 lazy val cloudSpannerV1 =
-  mkProject("cloud-spanner-v1", "proto-google-cloud-spanner-v1", "6.39.0")
+  mkProject("cloud-spanner-v1", "proto-google-cloud-spanner-v1", "6.40.0")
     .dependsOn(common)
 
 lazy val cloudStorageV2 =
