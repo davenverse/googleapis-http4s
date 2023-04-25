@@ -1,4 +1,4 @@
-ThisBuild / version := "0.0.4" // global version for "blend" defined in this build
+ThisBuild / version := "0.0.5" // global version for "blend" defined in this build
 
 ThisBuild / organization := "io.chrisdavenport"
 ThisBuild / organizationName := "Christopher Davenport"
@@ -101,7 +101,7 @@ lazy val java =
   mkProject("java", "protobuf-java", "3.22.3", "com.google.protobuf")
 
 lazy val common =
-  mkProject("common", "proto-google-common-protos", "2.16.0")
+  mkProject("common", "proto-google-common-protos", "2.17.0")
   .dependsOn(java)
 
 // Everything else, alphabetically
