@@ -131,7 +131,7 @@ lazy val cloudBigQueryReservationV1 =
   .dependsOn(common)
 
 lazy val cloudBigQueryStorageV1 =
-  mkProject("cloud-bigquerystorage-v1", "proto-google-cloud-bigquerystorage-v1", "2.36.0")
+  mkProject("cloud-bigquerystorage-v1", "proto-google-cloud-bigquerystorage-v1", "2.36.1")
   .dependsOn(common)
 
 lazy val cloudBigtableV2 =
