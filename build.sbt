@@ -159,7 +159,7 @@ lazy val cloudPubsubV1 =
     .dependsOn(common)
 
 lazy val cloudRedisV1 =
-  mkProject("cloud-redis-v1", "proto-google-cloud-redis-v1", "2.19.0")
+  mkProject("cloud-redis-v1", "proto-google-cloud-redis-v1", "2.20.0")
     .dependsOn(common)
 
 lazy val cloudSpannerV1 =
