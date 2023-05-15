@@ -12,6 +12,10 @@ ThisBuild / tlSonatypeUseLegacyHost := true
 
 ThisBuild / tlSitePublishBranch := Some("main")
 
+ThisBuild / mergifyStewardConfig ~= {
+  _.map(_.copy(mergeMinors = true, author = "davenverse-steward[bot]"))
+}
+
 val Scala213 = "2.13.10"
 ThisBuild / crossScalaVersions := Seq(Scala213, "3.2.2")
 ThisBuild / scalaVersion := Scala213

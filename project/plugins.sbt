@@ -5,6 +5,7 @@ addSbtPlugin("org.typelevel" % "sbt-typelevel-sonatype-ci-release" % sbtTypeleve
 addSbtPlugin("org.typelevel" % "sbt-typelevel-github" % sbtTypelevelVersion)
 addSbtPlugin("org.typelevel" % "sbt-typelevel-settings" % sbtTypelevelVersion)
 addSbtPlugin("org.typelevel" % "sbt-typelevel-site" % sbtTypelevelVersion)
+addSbtPlugin("org.typelevel" % "sbt-typelevel-mergify" % sbtTypelevelVersion)
 
 addSbtPlugin("org.scala-js" % "sbt-scalajs" % "1.13.1")
 addSbtPlugin("org.portable-scala" % "sbt-scalajs-crossproject"      % "1.3.1")
