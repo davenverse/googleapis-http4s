@@ -15,5 +15,5 @@ addSbtPlugin("org.portable-scala" % "sbt-scala-native-crossproject" % "1.3.1")
 addSbtPlugin("io.chrisdavenport" % "sbt-http4s-grpc" % "0.0.3")
 
 libraryDependencies ++= Seq(
-  "io.get-coursier" %% "coursier" % "2.1.4"
+  "io.get-coursier" %% "coursier" % "2.1.5"
 )
