@@ -8,12 +8,12 @@ addSbtPlugin("org.typelevel" % "sbt-typelevel-site" % sbtTypelevelVersion)
 addSbtPlugin("org.typelevel" % "sbt-typelevel-mergify" % sbtTypelevelVersion)
 
 addSbtPlugin("org.scala-js" % "sbt-scalajs" % "1.13.1")
-addSbtPlugin("org.portable-scala" % "sbt-scalajs-crossproject"      % "1.3.1")
+addSbtPlugin("org.portable-scala" % "sbt-scalajs-crossproject"      % "1.3.2")
 addSbtPlugin("org.scala-native" % "sbt-scala-native" % "0.4.14")
-addSbtPlugin("org.portable-scala" % "sbt-scala-native-crossproject" % "1.3.1")
+addSbtPlugin("org.portable-scala" % "sbt-scala-native-crossproject" % "1.3.2")
 
 addSbtPlugin("io.chrisdavenport" % "sbt-http4s-grpc" % "0.0.3")
 
 libraryDependencies ++= Seq(
-  "io.get-coursier" %% "coursier" % "2.1.4"
+  "io.get-coursier" %% "coursier" % "2.1.5"
 )
