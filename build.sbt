@@ -17,7 +17,7 @@ ThisBuild / mergifyStewardConfig ~= {
 }
 
 val Scala213 = "2.13.11"
-ThisBuild / crossScalaVersions := Seq(Scala213, "3.3.0")
+ThisBuild / crossScalaVersions := Seq(Scala213, "3.3.1")
 ThisBuild / scalaVersion := Scala213
 
 ThisBuild / githubWorkflowJavaVersions := Seq(JavaSpec.temurin("17"))
