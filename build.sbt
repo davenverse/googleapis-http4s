@@ -123,7 +123,7 @@ lazy val cloudBigQueryDataPolicyV1 =
   .dependsOn(common, iamV1)
 
 lazy val cloudBigQueryDataTransferV1 =
-  mkProject("cloud-bigquerydatatransfer-v1", "proto-google-cloud-bigquerydatatransfer-v1", "2.23.0")
+  mkProject("cloud-bigquerydatatransfer-v1", "proto-google-cloud-bigquerydatatransfer-v1", "2.24.0")
   .dependsOn(common)
 
 lazy val cloudBigQueryMigrationV2 =
@@ -155,7 +155,7 @@ lazy val cloudKmsV1 =
     .dependsOn(common)
 
 lazy val cloudMemcacheV1 =
-  mkProject("cloud-memcache-v1", "proto-google-cloud-memcache-v1", "2.23.0")
+  mkProject("cloud-memcache-v1", "proto-google-cloud-memcache-v1", "2.24.0")
     .dependsOn(common)
 
 lazy val cloudPubsubV1 =
@@ -175,7 +175,7 @@ lazy val cloudStorageV2 =
     .dependsOn(iamV1)
 
 lazy val cloudTraceV2 =
-  mkProject("cloud-trace-v2", "proto-google-cloud-trace-v2", "2.23.0")
+  mkProject("cloud-trace-v2", "proto-google-cloud-trace-v2", "2.24.0")
     .dependsOn(common)
 
 lazy val iamV1 =
