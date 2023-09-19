@@ -111,7 +111,7 @@ lazy val common =
 // Everything else, alphabetically
 
 lazy val cloudAlloyDb =
-  mkProject("cloud-alloydb", "proto-google-cloud-alloydb-v1", "0.12.0")
+  mkProject("cloud-alloydb", "proto-google-cloud-alloydb-v1", "0.13.0")
   .dependsOn(common)
 
 lazy val cloudBigQueryConnectionV1 =
