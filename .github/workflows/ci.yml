@@ -35,31 +35,22 @@ jobs:
     timeout-minutes: 60
     steps:
       - name: Checkout current branch (full)
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
-      - name: Download Java (temurin@17)
-        id: download-java-temurin-17
-        if: matrix.java == 'temurin@17'
-        uses: typelevel/download-java@v2
-        with:
-          distribution: temurin
-          java-version: 17
 
       - name: Setup Java (temurin@17)
         id: setup-java-temurin-17
         if: matrix.java == 'temurin@17'
         uses: actions/setup-java@v3
         with:
-          distribution: jdkfile
+          distribution: temurin
           java-version: 17
-          jdkFile: ${{ steps.download-java-temurin-17.outputs.jdkFile }}
           cache: sbt
 
       - name: sbt update
         if: matrix.java == 'temurin@17' && steps.setup-java-temurin-17.outputs.cache-hit == 'false'
-        run: sbt 'project ${{ matrix.project }}' '++ ${{ matrix.scala }}' reload +update
+        run: sbt +update
 
       - name: Check that workflows are up to date
         run: sbt githubWorkflowCheck
@@ -69,11 +60,11 @@ jobs:
 
       - name: Make target directories
         if: github.event_name != 'pull_request' && (startsWith(github.ref, 'refs/tags/v') || github.ref == 'refs/heads/main')
-        run: mkdir -p cloud-kms-v1/js/target cloud-spanner-v1/jvm/target iam-v1/native/target cloud-firestore-v1/native/target cloud-datastream-v1/js/target cloud-bigquerydatatransfer-v1/js/target cloud-trace-v2/jvm/target cloud-bigqueryconnection-v1/native/target cloud-datastream-v1/jvm/target cloud-bigqueryreservation-v1/js/target cloud-kms-v1/native/target cloud-bigquerymigration-v2/jvm/target cloud-bigqueryreservation-v1/native/target cloud-bigqueryreservation-v1/jvm/target cloud-datastream-v1/native/target cloud-bigquerydatapolicy-v1/js/target cloud-alloydb/js/target cloud-redis-v1/native/target cloud-firestore-v1/jvm/target cloud-memcache-v1/js/target site/target iam-v1/jvm/target cloud-bigqueryconnection-v1/jvm/target cloud-trace-v2/js/target cloud-redis-v1/jvm/target cloud-memcache-v1/native/target cloud-pubsub-v1/js/target cloud-bigtable-v2/native/target cloud-redis-v1/js/target iam-v1/js/target cloud-firestore-v1/js/target cloud-bigquerydatatransfer-v1/native/target cloud-trace-v2/native/target cloud-bigquerydatapolicy-v1/native/target cloud-bigquerymigration-v2/js/target cloud-bigqueryconnection-v1/js/target cloud-alloydb/native/target java/js/target cloud-spanner-v1/native/target cloud-bigtable-v2/js/target java/native/target common/native/target cloud-storage-v2/js/target cloud-bigquerydatapolicy-v1/jvm/target .jvm/target cloud-kms-v1/jvm/target cloud-bigquerystorage-v1/native/target cloud-bigquerymigration-v2/native/target cloud-bigquerydatatransfer-v1/jvm/target common/jvm/target java/jvm/target cloud-pubsub-v1/native/target cloud-pubsub-v1/jvm/target .js/target cloud-storage-v2/jvm/target cloud-bigtable-v2/jvm/target cloud-alloydb/jvm/target cloud-storage-v2/native/target cloud-memcache-v1/jvm/target cloud-bigquerystorage-v1/js/target cloud-bigquerystorage-v1/jvm/target target common/js/target .native/target cloud-spanner-v1/js/target project/target
+        run: mkdir -p cloud-kms-v1/js/target cloud-spanner-v1/jvm/target iam-v1/native/target cloud-firestore-v1/native/target cloud-datastream-v1/js/target cloud-bigquerydatatransfer-v1/js/target cloud-trace-v2/jvm/target cloud-bigqueryconnection-v1/native/target cloud-datastream-v1/jvm/target cloud-bigqueryreservation-v1/js/target cloud-kms-v1/native/target cloud-bigquerymigration-v2/jvm/target cloud-bigqueryreservation-v1/native/target cloud-bigqueryreservation-v1/jvm/target cloud-datastream-v1/native/target cloud-bigquerydatapolicy-v1/js/target cloud-alloydb/js/target cloud-redis-v1/native/target cloud-firestore-v1/jvm/target cloud-memcache-v1/js/target iam-v1/jvm/target cloud-bigqueryconnection-v1/jvm/target cloud-trace-v2/js/target cloud-redis-v1/jvm/target cloud-memcache-v1/native/target cloud-pubsub-v1/js/target cloud-bigtable-v2/native/target cloud-redis-v1/js/target iam-v1/js/target cloud-firestore-v1/js/target cloud-bigquerydatatransfer-v1/native/target cloud-trace-v2/native/target cloud-bigquerydatapolicy-v1/native/target cloud-bigquerymigration-v2/js/target cloud-bigqueryconnection-v1/js/target cloud-alloydb/native/target java/js/target cloud-spanner-v1/native/target cloud-bigtable-v2/js/target java/native/target common/native/target cloud-storage-v2/js/target cloud-bigquerydatapolicy-v1/jvm/target cloud-kms-v1/jvm/target cloud-bigquerystorage-v1/native/target cloud-bigquerymigration-v2/native/target cloud-bigquerydatatransfer-v1/jvm/target common/jvm/target java/jvm/target cloud-pubsub-v1/native/target cloud-pubsub-v1/jvm/target cloud-storage-v2/jvm/target cloud-bigtable-v2/jvm/target cloud-alloydb/jvm/target cloud-storage-v2/native/target cloud-memcache-v1/jvm/target cloud-bigquerystorage-v1/js/target cloud-bigquerystorage-v1/jvm/target common/js/target cloud-spanner-v1/js/target project/target
 
       - name: Compress target directories
         if: github.event_name != 'pull_request' && (startsWith(github.ref, 'refs/tags/v') || github.ref == 'refs/heads/main')
-        run: tar cf targets.tar cloud-kms-v1/js/target cloud-spanner-v1/jvm/target iam-v1/native/target cloud-firestore-v1/native/target cloud-datastream-v1/js/target cloud-bigquerydatatransfer-v1/js/target cloud-trace-v2/jvm/target cloud-bigqueryconnection-v1/native/target cloud-datastream-v1/jvm/target cloud-bigqueryreservation-v1/js/target cloud-kms-v1/native/target cloud-bigquerymigration-v2/jvm/target cloud-bigqueryreservation-v1/native/target cloud-bigqueryreservation-v1/jvm/target cloud-datastream-v1/native/target cloud-bigquerydatapolicy-v1/js/target cloud-alloydb/js/target cloud-redis-v1/native/target cloud-firestore-v1/jvm/target cloud-memcache-v1/js/target site/target iam-v1/jvm/target cloud-bigqueryconnection-v1/jvm/target cloud-trace-v2/js/target cloud-redis-v1/jvm/target cloud-memcache-v1/native/target cloud-pubsub-v1/js/target cloud-bigtable-v2/native/target cloud-redis-v1/js/target iam-v1/js/target cloud-firestore-v1/js/target cloud-bigquerydatatransfer-v1/native/target cloud-trace-v2/native/target cloud-bigquerydatapolicy-v1/native/target cloud-bigquerymigration-v2/js/target cloud-bigqueryconnection-v1/js/target cloud-alloydb/native/target java/js/target cloud-spanner-v1/native/target cloud-bigtable-v2/js/target java/native/target common/native/target cloud-storage-v2/js/target cloud-bigquerydatapolicy-v1/jvm/target .jvm/target cloud-kms-v1/jvm/target cloud-bigquerystorage-v1/native/target cloud-bigquerymigration-v2/native/target cloud-bigquerydatatransfer-v1/jvm/target common/jvm/target java/jvm/target cloud-pubsub-v1/native/target cloud-pubsub-v1/jvm/target .js/target cloud-storage-v2/jvm/target cloud-bigtable-v2/jvm/target cloud-alloydb/jvm/target cloud-storage-v2/native/target cloud-memcache-v1/jvm/target cloud-bigquerystorage-v1/js/target cloud-bigquerystorage-v1/jvm/target target common/js/target .native/target cloud-spanner-v1/js/target project/target
+        run: tar cf targets.tar cloud-kms-v1/js/target cloud-spanner-v1/jvm/target iam-v1/native/target cloud-firestore-v1/native/target cloud-datastream-v1/js/target cloud-bigquerydatatransfer-v1/js/target cloud-trace-v2/jvm/target cloud-bigqueryconnection-v1/native/target cloud-datastream-v1/jvm/target cloud-bigqueryreservation-v1/js/target cloud-kms-v1/native/target cloud-bigquerymigration-v2/jvm/target cloud-bigqueryreservation-v1/native/target cloud-bigqueryreservation-v1/jvm/target cloud-datastream-v1/native/target cloud-bigquerydatapolicy-v1/js/target cloud-alloydb/js/target cloud-redis-v1/native/target cloud-firestore-v1/jvm/target cloud-memcache-v1/js/target iam-v1/jvm/target cloud-bigqueryconnection-v1/jvm/target cloud-trace-v2/js/target cloud-redis-v1/jvm/target cloud-memcache-v1/native/target cloud-pubsub-v1/js/target cloud-bigtable-v2/native/target cloud-redis-v1/js/target iam-v1/js/target cloud-firestore-v1/js/target cloud-bigquerydatatransfer-v1/native/target cloud-trace-v2/native/target cloud-bigquerydatapolicy-v1/native/target cloud-bigquerymigration-v2/js/target cloud-bigqueryconnection-v1/js/target cloud-alloydb/native/target java/js/target cloud-spanner-v1/native/target cloud-bigtable-v2/js/target java/native/target common/native/target cloud-storage-v2/js/target cloud-bigquerydatapolicy-v1/jvm/target cloud-kms-v1/jvm/target cloud-bigquerystorage-v1/native/target cloud-bigquerymigration-v2/native/target cloud-bigquerydatatransfer-v1/jvm/target common/jvm/target java/jvm/target cloud-pubsub-v1/native/target cloud-pubsub-v1/jvm/target cloud-storage-v2/jvm/target cloud-bigtable-v2/jvm/target cloud-alloydb/jvm/target cloud-storage-v2/native/target cloud-memcache-v1/jvm/target cloud-bigquerystorage-v1/js/target cloud-bigquerystorage-v1/jvm/target common/js/target cloud-spanner-v1/js/target project/target
 
       - name: Upload target directories
         if: github.event_name != 'pull_request' && (startsWith(github.ref, 'refs/tags/v') || github.ref == 'refs/heads/main')
@@ -89,36 +80,26 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        scala: [2.13.12]
         java: [temurin@17]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout current branch (full)
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
-      - name: Download Java (temurin@17)
-        id: download-java-temurin-17
-        if: matrix.java == 'temurin@17'
-        uses: typelevel/download-java@v2
-        with:
-          distribution: temurin
-          java-version: 17
 
       - name: Setup Java (temurin@17)
         id: setup-java-temurin-17
         if: matrix.java == 'temurin@17'
         uses: actions/setup-java@v3
         with:
-          distribution: jdkfile
+          distribution: temurin
           java-version: 17
-          jdkFile: ${{ steps.download-java-temurin-17.outputs.jdkFile }}
           cache: sbt
 
       - name: sbt update
         if: matrix.java == 'temurin@17' && steps.setup-java-temurin-17.outputs.cache-hit == 'false'
-        run: sbt '++ ${{ matrix.scala }}' reload +update
+        run: sbt +update
 
       - name: Download target directories (2.13, googleapis-http4sJVM)
         uses: actions/download-artifact@v3
@@ -185,7 +166,7 @@ jobs:
         env:
           PGP_SECRET: ${{ secrets.PGP_SECRET }}
           PGP_PASSPHRASE: ${{ secrets.PGP_PASSPHRASE }}
-        run: echo $PGP_SECRET | base64 -di | gpg --import
+        run: echo $PGP_SECRET | base64 -d -i - | gpg --import
 
       - name: Import signing key and strip passphrase
         if: env.PGP_SECRET != '' && env.PGP_PASSPHRASE != ''
@@ -193,7 +174,7 @@ jobs:
           PGP_SECRET: ${{ secrets.PGP_SECRET }}
           PGP_PASSPHRASE: ${{ secrets.PGP_PASSPHRASE }}
         run: |
-          echo "$PGP_SECRET" | base64 -di > /tmp/signing-key.gpg
+          echo "$PGP_SECRET" | base64 -d -i - > /tmp/signing-key.gpg
           echo "$PGP_PASSPHRASE" | gpg --pinentry-mode loopback --passphrase-fd 0 --import /tmp/signing-key.gpg
           (echo "$PGP_PASSPHRASE"; echo; echo) | gpg --command-fd 0 --pinentry-mode loopback --change-passphrase $(gpg --list-secret-keys --with-colons 2> /dev/null | grep '^sec:' | cut --delimiter ':' --fields 5 | tail -n 1)
 
@@ -202,7 +183,7 @@ jobs:
           SONATYPE_USERNAME: ${{ secrets.SONATYPE_USERNAME }}
           SONATYPE_PASSWORD: ${{ secrets.SONATYPE_PASSWORD }}
           SONATYPE_CREDENTIAL_HOST: ${{ secrets.SONATYPE_CREDENTIAL_HOST }}
-        run: sbt '++ ${{ matrix.scala }}' tlCiRelease
+        run: sbt tlCiRelease
 
   dependency-submission:
     name: Submit Dependencies
@@ -210,82 +191,65 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        scala: [2.13.12]
         java: [temurin@17]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout current branch (full)
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
-      - name: Download Java (temurin@17)
-        id: download-java-temurin-17
-        if: matrix.java == 'temurin@17'
-        uses: typelevel/download-java@v2
-        with:
-          distribution: temurin
-          java-version: 17
 
       - name: Setup Java (temurin@17)
         id: setup-java-temurin-17
         if: matrix.java == 'temurin@17'
         uses: actions/setup-java@v3
         with:
-          distribution: jdkfile
+          distribution: temurin
           java-version: 17
-          jdkFile: ${{ steps.download-java-temurin-17.outputs.jdkFile }}
           cache: sbt
 
       - name: sbt update
         if: matrix.java == 'temurin@17' && steps.setup-java-temurin-17.outputs.cache-hit == 'false'
-        run: sbt '++ ${{ matrix.scala }}' reload +update
+        run: sbt +update
 
       - name: Submit Dependencies
         uses: scalacenter/sbt-dependency-submission@v2
+        with:
+          modules-ignore: docs_2.13 docs_3 googleapis-http4sjvm_2.13 googleapis-http4sjvm_3 googleapis-http4sjs_2.13 googleapis-http4sjs_3 googleapis-http4snative_2.13 googleapis-http4snative_3
+          configs-ignore: test scala-tool scala-doc-tool test-internal
 
   site:
     name: Generate Site
     strategy:
       matrix:
         os: [ubuntu-latest]
-        scala: [2.13.12]
         java: [temurin@17]
     runs-on: ${{ matrix.os }}
     steps:
       - name: Checkout current branch (full)
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
-
-      - name: Download Java (temurin@17)
-        id: download-java-temurin-17
-        if: matrix.java == 'temurin@17'
-        uses: typelevel/download-java@v2
-        with:
-          distribution: temurin
-          java-version: 17
 
       - name: Setup Java (temurin@17)
         id: setup-java-temurin-17
         if: matrix.java == 'temurin@17'
         uses: actions/setup-java@v3
         with:
-          distribution: jdkfile
+          distribution: temurin
           java-version: 17
-          jdkFile: ${{ steps.download-java-temurin-17.outputs.jdkFile }}
           cache: sbt
 
       - name: sbt update
         if: matrix.java == 'temurin@17' && steps.setup-java-temurin-17.outputs.cache-hit == 'false'
-        run: sbt '++ ${{ matrix.scala }}' reload +update
+        run: sbt +update
 
       - name: Generate site
-        run: sbt '++ ${{ matrix.scala }}' docs/tlSite
+        run: sbt docs/tlSite
 
       - name: Publish site
         if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
-        uses: peaceiris/actions-gh-pages@v3.9.0
+        uses: peaceiris/actions-gh-pages@v3.9.3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: site/target/docs/site
