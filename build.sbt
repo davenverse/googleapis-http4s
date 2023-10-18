@@ -1,4 +1,4 @@
-ThisBuild / version := "0.0.5" // global version for "blend" defined in this build
+ThisBuild / version := "0.0.6" // global version for "blend" defined in this build
 
 ThisBuild / organization := "io.chrisdavenport"
 ThisBuild / organizationName := "Christopher Davenport"
@@ -102,7 +102,7 @@ lazy val `googleapis-http4s` = tlCrossRootProject
 // Core projects
 
 lazy val java =
-  mkProject("java", "protobuf-java", "3.23.4", "com.google.protobuf")
+  mkProject("java", "protobuf-java", "3.24.4", "com.google.protobuf")
 
 lazy val common =
   mkProject("common", "proto-google-common-protos", "2.26.0")
