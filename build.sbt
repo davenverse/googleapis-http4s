@@ -1,4 +1,4 @@
-ThisBuild / version := "0.0.5" // global version for "blend" defined in this build
+ThisBuild / version := "0.0.6" // global version for "blend" defined in this build
 
 ThisBuild / organization := "io.chrisdavenport"
 ThisBuild / organizationName := "Christopher Davenport"
