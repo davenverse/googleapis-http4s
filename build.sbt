@@ -184,5 +184,5 @@ lazy val iamV1 =
 lazy val docs = project.in(file("site"))
   .enablePlugins(TypelevelSitePlugin)
   .settings(
-    tlSiteIsTypelevelProject := true,
+    tlSiteIsTypelevelProject := Some(TypelevelProject.Affiliate),
   )
