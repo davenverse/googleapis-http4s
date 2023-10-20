@@ -105,7 +105,7 @@ lazy val java =
   mkProject("java", "protobuf-java", "3.24.4", "com.google.protobuf")
 
 lazy val common =
-  mkProject("common", "proto-google-common-protos", "2.26.0")
+  mkProject("common", "proto-google-common-protos", "2.27.0")
   .dependsOn(java)
 
 // Everything else, alphabetically
