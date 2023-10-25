@@ -151,7 +151,7 @@ lazy val cloudFirestoreV1 =
     .dependsOn(common)
 
 lazy val cloudKmsV1 =
-  mkProject("cloud-kms-v1", "proto-google-cloud-kms-v1", "0.122.0")
+  mkProject("cloud-kms-v1", "proto-google-cloud-kms-v1", "0.123.0")
     .dependsOn(common)
 
 lazy val cloudMemcacheV1 =
