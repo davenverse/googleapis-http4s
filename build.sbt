@@ -16,7 +16,7 @@ ThisBuild / mergifyStewardConfig ~= {
   _.map(_.copy(mergeMinors = true, author = "davenverse-steward[bot]"))
 }
 
-val Scala213 = "2.13.12"
+val Scala213 = "2.13.14"
 ThisBuild / crossScalaVersions := Seq(Scala213, "3.3.3")
 ThisBuild / scalaVersion := Scala213
 
