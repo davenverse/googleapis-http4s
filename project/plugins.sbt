@@ -1,4 +1,4 @@
-lazy val sbtTypelevelVersion = "0.6.7"
+lazy val sbtTypelevelVersion = "0.7.1"
 addSbtPlugin("org.typelevel" % "sbt-typelevel-ci" % sbtTypelevelVersion)
 addSbtPlugin("org.typelevel" % "sbt-typelevel-ci-signing" % sbtTypelevelVersion)
 addSbtPlugin("org.typelevel" % "sbt-typelevel-sonatype-ci-release" % sbtTypelevelVersion)
