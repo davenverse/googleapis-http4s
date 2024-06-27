@@ -143,7 +143,7 @@ lazy val cloudBigtableV2 =
   .dependsOn(common)
 
 lazy val cloudDatastreamV1 =
-  mkProject("cloud-datastream-v1", "proto-google-cloud-datastream-v1", "1.44.0")
+  mkProject("cloud-datastream-v1", "proto-google-cloud-datastream-v1", "1.45.0")
   .dependsOn(common)
 
 lazy val cloudFirestoreV1 =
