@@ -63,7 +63,7 @@ def mkProject(
         try { // if this dep already exists, skip publishing
           Resolve()
             .addDependencies(dep)
-            .addRepositories(Repositories.sonatype("releases"))
+            .addRepositories(Repositories.central)
             .run()
           true
         } catch {
