@@ -8,15 +8,14 @@ ThisBuild / developers := List(
   tlGitHubDev("armanbilge", "Arman Bilge")
 )
 ThisBuild / tlCiReleaseBranches := Seq("main")
-ThisBuild / tlSonatypeUseLegacyHost := true
 
 ThisBuild / tlSitePublishBranch := Some("main")
 
 ThisBuild / mergifyStewardConfig ~= {
-  _.map(_.copy(mergeMinors = true, author = "davenverse-steward[bot]"))
+  _.map(_.withMergeMinors(true).withAuthor("davenverse-steward[bot]"))
 }
 
-val Scala213 = "2.13.14"
+val Scala213 = "2.13.18"
 ThisBuild / crossScalaVersions := Seq(Scala213, "3.3.3")
 ThisBuild / scalaVersion := Scala213
 
