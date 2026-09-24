@@ -183,5 +183,12 @@ lazy val iamV1 =
 lazy val docs = project.in(file("site"))
   .enablePlugins(TypelevelSitePlugin)
   .settings(
+    laikaTheme := tlSiteHelium.value.site
+      .topNavigationBar(
+        homeLink = laika.helium.config.IconLink.internal(laika.ast.Path.Root / "index.md", laika.helium.config.HeliumIcon.home)
+      )
+      .build
+  )
+  .settings(
     tlSiteIsTypelevelProject := Some(TypelevelProject.Affiliate),
   )
