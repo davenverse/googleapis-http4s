@@ -7,16 +7,15 @@ ThisBuild / developers := List(
   tlGitHubDev("christopherdavenport", "Christopher Davenport"),
   tlGitHubDev("armanbilge", "Arman Bilge")
 )
-ThisBuild / tlCiReleaseBranches := Seq("main")
-ThisBuild / tlSonatypeUseLegacyHost := true
+ThisBuild / tlCiReleaseBranches := Seq()
 
 ThisBuild / tlSitePublishBranch := Some("main")
 
 ThisBuild / mergifyStewardConfig ~= {
-  _.map(_.copy(mergeMinors = true, author = "davenverse-steward[bot]"))
+  _.map(_.withMergeMinors(true).withAuthor("davenverse-steward[bot]"))
 }
 
-val Scala213 = "2.13.14"
+val Scala213 = "2.13.18"
 ThisBuild / crossScalaVersions := Seq(Scala213, "3.3.3")
 ThisBuild / scalaVersion := Scala213
 
@@ -64,7 +63,7 @@ def mkProject(
         try { // if this dep already exists, skip publishing
           Resolve()
             .addDependencies(dep)
-            .addRepositories(Repositories.sonatype("releases"))
+            .addRepositories(Repositories.central)
             .run()
           true
         } catch {
@@ -183,6 +182,13 @@ lazy val iamV1 =
 
 lazy val docs = project.in(file("site"))
   .enablePlugins(TypelevelSitePlugin)
+  .settings(
+    laikaTheme := tlSiteHelium.value.site
+      .topNavigationBar(
+        homeLink = laika.helium.config.IconLink.internal(laika.ast.Path.Root / "index.md", laika.helium.config.HeliumIcon.home)
+      )
+      .build
+  )
   .settings(
     tlSiteIsTypelevelProject := Some(TypelevelProject.Affiliate),
   )

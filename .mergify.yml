@@ -12,12 +12,12 @@ pull_request_rules:
   - or:
     - body~=labels:.*early-semver-patch
     - body~=labels:.*early-semver-minor
-  - status-success=Build and Test (ubuntu-latest, 2.13, temurin@17, googleapis-http4sJVM)
-  - status-success=Build and Test (ubuntu-latest, 2.13, temurin@17, googleapis-http4sJS)
-  - status-success=Build and Test (ubuntu-latest, 2.13, temurin@17, googleapis-http4sNative)
-  - status-success=Build and Test (ubuntu-latest, 3, temurin@17, googleapis-http4sJVM)
-  - status-success=Build and Test (ubuntu-latest, 3, temurin@17, googleapis-http4sJS)
-  - status-success=Build and Test (ubuntu-latest, 3, temurin@17, googleapis-http4sNative)
+  - status-success=Test (ubuntu-22.04, 2.13, temurin@17, googleapis-http4sJVM)
+  - status-success=Test (ubuntu-22.04, 2.13, temurin@17, googleapis-http4sJS)
+  - status-success=Test (ubuntu-22.04, 2.13, temurin@17, googleapis-http4sNative)
+  - status-success=Test (ubuntu-22.04, 3, temurin@17, googleapis-http4sJVM)
+  - status-success=Test (ubuntu-22.04, 3, temurin@17, googleapis-http4sJS)
+  - status-success=Test (ubuntu-22.04, 3, temurin@17, googleapis-http4sNative)
   actions:
     merge: {}
 - name: Label cloud-alloydb PRs
