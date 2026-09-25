@@ -7,7 +7,7 @@ ThisBuild / developers := List(
   tlGitHubDev("christopherdavenport", "Christopher Davenport"),
   tlGitHubDev("armanbilge", "Arman Bilge")
 )
-ThisBuild / tlCiReleaseBranches := Seq("main")
+ThisBuild / tlCiReleaseBranches := Seq()
 
 ThisBuild / tlSitePublishBranch := Some("main")
 
